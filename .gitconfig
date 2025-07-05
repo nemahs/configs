@@ -1,0 +1,13 @@
+[user]
+	name = Nemahs
+	email = 8461086+nemahs@users.noreply.github.com
+
+[alias]
+   shallowClone = clone --depth 1
+  shallowPull = pull --depth 1
+[core]
+	editor = vim
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true

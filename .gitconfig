@@ -3,11 +3,31 @@
 	email = 8461086+nemahs@users.noreply.github.com
 
 [alias]
-   shallowClone = clone --depth 1
-  shallowPull = pull --depth 1
+
 [core]
 	editor = vim
+	excludesfile = /home/nemahs/.gitignore
 [init]
 	defaultBranch = main
 [push]
 	autoSetupRemote = true
+	followTags = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true

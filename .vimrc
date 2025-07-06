@@ -1,19 +1,23 @@
 " Basic config {{{
-set number
+colorscheme torte
+filetype indent on
+filetype on
+set cindent
+set cinoptions="g0,N-s" " check :help cindent for more options
 set expandtab
 set nohlsearch
-set tabstop=2
+set number
 set shiftwidth=2
+set tabstop=2
 set wildmenu
 set wildmode=list:longest
-colorscheme torte
-filetype on
-filetype indent on
+syntax on
 let mapleader=';'
 let localleader='\\'
 " }}}
 
 " Spelling fixes {{{
+iabbrev teh the
 
 " }}}
 
@@ -21,14 +25,15 @@ let localleader='\\'
 inoremap jj <Esc>
 nnoremap <leader>ev :edit ~/.vimrc<CR>
 nnoremap <leader>sv :source ~/.vimrc<CR>
-nnoremap nl O<ESC>
+nnoremap <S-k> dd2kp
+nnoremap <S-j> ddp
+nnoremap nl o<ESC>
 nnoremap <Space> i_<Esc>r
 " }}}
 
 " Functions {{{
 function! GenerateIncludeGuard(file_name)
-  let guardName = toupper(join(split(a:file_name, '\.'), '_'))
-  echom guardName
+  const guardName = toupper(join(split(a:file_name, '\.'), '_'))
 
   execute "normal! a#ifndef " . guardName . "\<cr>"
       \ . "#define " . guardName . "\<cr>"

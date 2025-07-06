@@ -2,15 +2,29 @@
 colorscheme torte
 filetype indent on
 filetype on
+let indentwidth=2
+set background=dark
+set backspace=indent
 set cindent
-set cinoptions="g0,N-s" " check :help cindent for more options
+set cinoptions="g0,N-s" " check :help cinoptions-values for more options
+set cursorline
 set expandtab
+set encoding=utf-8
+set foldnestmax=3
+set foldclose=all
+set foldcolumn=2
+set incsearch
+set ignorecase smartcase
 set nohlsearch
-set number
-set shiftwidth=2
-set tabstop=2
+set number relativenumber
+let &shiftwidth=indentwidth
+set shiftround
+set scrolloff=1
+let &tabstop=indentwidth
+set title
 set wildmenu
 set wildmode=list:longest
+set wildignore+=.pyc,.swp
 syntax on
 let mapleader=';'
 let localleader='\\'
@@ -18,11 +32,14 @@ let localleader='\\'
 
 " Spelling fixes {{{
 iabbrev teh the
+cabbrev W w
+cabbrev WQ wq
 
 " }}}
 
-"Remaps {{{ 
+" Remaps {{{
 inoremap jj <Esc>
+inoremap <C-Enter> <C-x><C-]>
 nnoremap <leader>ev :edit ~/.vimrc<CR>
 nnoremap <leader>sv :source ~/.vimrc<CR>
 nnoremap <S-k> dd2kp
@@ -44,7 +61,11 @@ endfunction
 " }}}
 
 " Auto Commands {{{
-autocmd! FileType vim setlocal foldmethod=marker
+augroup FoldMethods
+  autocmd! FileType * setlocal foldmethod=marker
+  autocmd  FileType vim setlocal foldmethod=marker
+  autocmd  FileType cpp,h,c setlocal foldmethod=syntax
+augroup END
 
 augroup Comments
   autocmd! FileType javascript,cpp,c nnoremap <buffer> <localleader>c I//<ESC>
@@ -55,5 +76,20 @@ augroup HeaderSetup
   autocmd! BufNewFile *.h call GenerateIncludeGuard(expand("<afile>"))
 augroup END
 
+augroup CPPOptions
+  autocmd! FileType c,cpp,h, setlocal colorcolumn=140
+augroup END
+
 " }}}
 
+" Ctags {{{
+if executable('ctags')
+  set tags="./tags,tags;~"
+  nnoremap <leader>h :call SwitchHeader()
+
+  function! SwitchHeader()
+    " TODO: Copy from the high side vimrc
+
+  endfunction
+endif
+" }}}
